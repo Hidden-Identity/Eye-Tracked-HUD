@@ -137,9 +137,15 @@ protected cb func OnInitialize() -> Bool {
 }
 
 // --- TOP RIGHT ZONE ---
+@addField(PlayerPuppet)
+public let eyeTrackedMinimapRef: wref<MinimapContainerController>;
 @wrapMethod(MinimapContainerController)
 protected cb func OnInitialize() -> Bool {
     let result = wrappedMethod();
+    let player = this.GetPlayerControlledObject() as PlayerPuppet;
+    if IsDefined(player) {
+        player.eyeTrackedMinimapRef = this;
+    }
     this.SetupTobiiTracking(HUDZone.TopRight);
     return result;
 }
@@ -198,7 +204,23 @@ public class TobiiHudRefreshCallback extends DelayCallback {
         switch this.m_zone {
             case HUDZone.TopLeft:          zone = EyeTrackedHUDConfig.GetTopLeft(); break;
             case HUDZone.TopRight:         zone = EyeTrackedHUDConfig.GetTopRight(); break;
-            case HUDZone.UpperMiddleRight: zone = EyeTrackedHUDConfig.GetUpperMiddleRight(); break;
+            case HUDZone.UpperMiddleRight: zone = EyeTrackedHUDConfig.GetUpperMiddleRight();
+                let player = this.m_controller.GetPlayerControlledObject() as PlayerPuppet;
+                let isMinimapVisible = true;
+                if IsDefined(player) && IsDefined(player.eyeTrackedMinimapRef) {
+                    let root = player.eyeTrackedMinimapRef.GetRootWidget();
+                    if IsDefined(root) {
+                        isMinimapVisible = root.IsVisible();
+                    }
+                }
+
+                if !isMinimapVisible {
+                    let topZone = EyeTrackedHUDConfig.GetTopRight();
+                    if topZone.yMin < zone.yMin {
+                        zone.yMin = topZone.yMin;
+                    }
+                }
+                break;
             case HUDZone.LowerMiddleRight: zone = EyeTrackedHUDConfig.GetLowerMiddleRight(); break;
             case HUDZone.BottomLeft:       zone = EyeTrackedHUDConfig.GetBottomLeft(); break;
             case HUDZone.BottomRight:      zone = EyeTrackedHUDConfig.GetBottomRight(); break;
