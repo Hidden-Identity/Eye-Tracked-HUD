@@ -100,6 +100,6 @@ public class EyeTrackedHUDConfig {
     // to disable, set return false;
     // =============================
     public static func is3DMarkerTransparencyEnabled() -> Bool {
-        return true;
+        return false;
     }
 }
