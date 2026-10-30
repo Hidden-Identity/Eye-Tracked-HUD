@@ -13,7 +13,7 @@ Keeps the view of Night City completely clean and cinematic, seamlessly fading t
 
 * **Top Left:** Health Bar, Stamina Bar, and active Buff List*
 * **Top Right:** Minimap and Wanted Bar.
-* **Upper Middle Right:** Active Quest and objectives.
+* **Upper Middle Right:** Active Job and objectives.
 * **Lower Middle Right:** Contextual Input Hints.
 * **Bottom Left:** Quick actions/items, Autodrive UI and Vehicle Speedometer.
 * **Bottom Right:** Equipped Weapon and Crouch Indicator.

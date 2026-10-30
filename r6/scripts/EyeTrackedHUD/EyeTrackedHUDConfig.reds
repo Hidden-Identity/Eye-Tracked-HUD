@@ -61,7 +61,7 @@ public class EyeTrackedHUDConfig {
         return zone;
     }
 
-    // Active Quest & Objectives
+    // Active Job & Objectives
     public static func GetUpperMiddleRight() -> EyeZone {
         let zone: EyeZone;
         zone.xMin = 0.77; zone.xMax = 1.1;
