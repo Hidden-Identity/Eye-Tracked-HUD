@@ -206,12 +206,14 @@ public class TobiiHudRefreshCallback extends DelayCallback {
             case HUDZone.TopRight:         zone = EyeTrackedHUDConfig.GetTopRight(); break;
             case HUDZone.UpperMiddleRight: zone = EyeTrackedHUDConfig.GetUpperMiddleRight();
                 let player = this.m_controller.GetPlayerControlledObject() as PlayerPuppet;
-                let isMinimapVisible = true;
+                let isMinimapVisible = false;
                 if IsDefined(player) && IsDefined(player.eyeTrackedMinimapRef) {
                     let root = player.eyeTrackedMinimapRef.GetRootWidget();
                     if IsDefined(root) {
                         isMinimapVisible = root.IsVisible();
                     }
+                } else {
+                    isMinimapVisible = false;
                 }
 
                 if !isMinimapVisible {
